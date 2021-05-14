@@ -44,6 +44,8 @@ RUN \
     pip install -r /tmp/base_image_requirements.txt && \
     # Check that the fast implementation of protobuf is used.
     python -c "from google.protobuf.internal import api_implementation; assert api_implementation._default_implementation_type == 'cpp'; print ('Verified fast protobuf used.')" && \
+    python -c "import nltk; nltk.download('stopwords')" && \
+    rm /root/nltk_data/corpora/stopwords.zip && \
     # Remove pip cache.
     rm -rf /root/.cache/pip && \
     rm -rf /tmp/base_image_requirements.txt
